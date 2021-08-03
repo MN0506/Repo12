@@ -1,0 +1,77 @@
+<nav class="navbar navbar-light bg-primary">
+  <div class="container-fluid">
+    <h1 style="color:aliceblue;">User Assignment</h1>
+    <div class="d-flex">
+      <button (click)=" clickAddBranch()" class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Branch</button>
+    </div>
+  </div>
+</nav>
+
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th scope="col">Branch ID</th>
+      <th scope="col">Branch Name</th>
+      <th scope="col">Repository Name</th>
+      <th scope="col">Branch</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of branchData">
+     <td>{{row.id}}</td>
+     <td>{{row.branchname}}</td>
+     <td>{{row.repositoryname}}</td>
+     <td>{{row.branch}}</td>
+      <td>
+        <button (click)="onEdit(row)" style="color:aliceblue;" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"class= "btn btn-info">Edit</button>
+        <button (click)="deleteBranch(row)" class="btn btn-danger mx-3">Delete</button>
+      </td>
+      
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Branch Assignment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form [formGroup]="formValue">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Branch Name</label>
+                <input type="text" formControlName="branchname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Repository Name</label>
+                <select class="form-select" formControlName="repositoryname" aria-label="Default select example">
+                  <option *ngFor=" let row of repoData">{{row.name}}</option>
+                  
+                 </select>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label" > Branch</label>
+                      <select class="form-select" formControlName="branch">
+                      <option selected>Select Branch</option>
+                      <option value="1">Master</option>
+                      <option value="2">Default</option>
+                     </select>
+              </div>
+         </form>
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" *ngIf="showAdd" (click)="postBranchdetails()" class="btn btn-primary">Add</button>
+        <button type="button" *ngIf="showUpdate" (click)="updateBranchdetails()" class="btn btn-primary">Update</button>
+      </div>
+
+    </div>
+  </div>
+</div>

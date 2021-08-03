@@ -1,0 +1,73 @@
+{
+  "posts": [
+    {
+      "id": 15,
+      "name": "ABC",
+      "label": "test",
+      "email": "abc@gmail.com",
+      "date": "2021-08-02"
+    },
+    {
+      "id": 17,
+      "name": "Sample123",
+      "label": "Kishore",
+      "email": "abc123@gmail.com",
+      "date": "2021-08-02",
+      "modifieddate": "2021-08-02"
+    },
+    {
+      "id": 18,
+      "name": "Post",
+      "label": null,
+      "email": "ABC1@gmail.com",
+      "date": "2021-08-02"
+    },
+    {
+      "id": 19,
+      "name": "Testabc",
+      "label": "abc",
+      "email": "abc@yahoo.com",
+      "date": "2021-08-02"
+    },
+    {
+      "id": 20,
+      "name": "Abc",
+      "label": "abcdef",
+      "email": "abc@gmail.com",
+      "date": "2021-08-02",
+      "modifieddate": "2021-08-02"
+    }
+  ],
+  "comments": [
+    {
+      "id": 14,
+      "branchname": "ALexa123",
+      "repositoryname": "1",
+      "branch": "1"
+    },
+    {
+      "id": 15,
+      "branchname": "sample123",
+      "repositoryname": "1",
+      "branch": "2"
+    },
+    {
+      "id": 16,
+      "branchname": "XYZE",
+      "repositoryname": "1",
+      "branch": "1"
+    },
+    {
+      "id": 17,
+      "branchname": "sample895",
+      "repositoryname": "1",
+      "branch": "1"
+    },
+    {
+      "id": 18
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

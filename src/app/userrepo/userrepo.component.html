@@ -1,0 +1,91 @@
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+      <h1 style="color:aliceblue;">Repository Dashboard</h1>
+      <div class="d-flex">
+      <button (click)="clickAddRepo()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"class="btn btn-success" >Create</button>
+    </div>
+  </div>
+  </nav>
+
+  <table class="table mt-3">
+    <thead>
+      <tr>
+        <th scope="col"> Repo ID</th>
+        <th scope="col">Repo Name</th>
+        <th scope="col">Repo Label</th>
+        <th scope="col">Email</th>
+        <th scope="col">Created on</th>
+        <th scope="col">Modified on</th>
+        <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of repoData">
+           <td>{{row.id}}</td>
+           <td>{{row.name}}</td>
+           <td>{{row.label}}</td>
+           <td>{{row.email}}</td>
+           <td>{{row.date}}</td>
+           <td>{{row.modifieddate}}</td>
+           <td>
+            <button (click)="onEdit(row)" button style="color : aliceblue;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
+             <button (click)="deleteRepo(row)"class="btn btn-danger mx-3">Delete</button>
+           </td>
+  
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Repo Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {{formValue.value|json}}
+          <form [formGroup]="formValue" (ngSubmit)="submitRepo()">
+            
+         
+          <div class="mb-3">
+            <label class="form-label"><span class="required-asterisk">*</span>Repo Name</label>
+            <input type="text" formControlName="name" class="form-control" placeholder="Enter Repo Name"
+                    [ngClass]="{ 'is-invalid': (isFormSubmitted && formValue.controls.name.errors) || (!formValue.controls.name.pristine && formValue.controls.name.invalid) }">
+            <div class="invalid-feedback" *ngIf="(isFormSubmitted && formValue.controls.name.errors) || (!formValue.controls.name.pristine && formValue.controls.name.invalid)">
+                    <div *ngIf="formValue.controls.name.errors?.required">Repo Name is required</div>
+                    <div *ngIf="formValue.controls.name.errors?.pattern">Only Alphabets with space between 2 to 20 characters </div>
+            </div>
+        </div>
+            
+        <div class="mb-3">
+          <label class="form-label"><span class="required-asterisk">*</span>Repo Label</label>
+             <input type="text" formControlName="label" class="form-control" placeholder="Enter Repo Label"
+                    [ngClass]="{ 'is-invalid': (isFormSubmitted && formValue.controls.label.errors) || (!formValue.controls.label.pristine && formValue.controls.label.invalid) }">
+             <div class="invalid-feedback" *ngIf="(isFormSubmitted && formValue.controls.label.errors) || (!formValue.controls.label.pristine && formValue.controls.label.invalid)">
+                    <div *ngIf="formValue.controls.label.errors?.required">Repo <Label></Label><Label></Label> is required</div>
+             </div>
+        </div>
+  
+            <div class="mb-3">
+              <label class= " col-form-label"><span class="required-asterisk">*</span>Email</label>
+                <input type="text" formControlName="email" class="form-control" placeholder="Enter Email"
+                        [ngClass]="{ 'is-invalid': (isFormSubmitted && formValue.controls.email.errors) || (!formValue.controls.email.pristine && formValue.controls.email.invalid) }">
+                  <div class="invalid-feedback"
+                        *ngIf="(isFormSubmitted && formValue.controls.email.errors) || (!formValue.controls.email.pristine && formValue.controls.email.invalid)">
+                        <div *ngIf="formValue.controls.email.errors?.required">Email is required</div>
+                        <div *ngIf="formValue.controls.email.errors?.pattern">Enter valid email</div>
+                  </div>
+            </div>
+          </form>
+      </div>
+        
+      <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" *ngIf="showAdd" (click)="postRepoDetails()" [disabled]="!formValue.valid" class="btn btn-primary">Add</button>
+          <button type="button" *ngIf="showUpdate" (click)="updateRepoDetails()" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
